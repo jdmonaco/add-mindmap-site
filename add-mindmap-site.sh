@@ -31,15 +31,16 @@ MAPNAME="$DATE $STEM"
 MAPPATH="$SITE/$MAPNAME"
 rm -rf "$MAPPATH"
 mkdir -p "$MAPPATH"
-cd "$MAPPATH"
 
 # Extract the zip file in the new web directory
+cd "$MAPPATH"
 unzip "$ARCHIVE" > /dev/null
 mv `ls *.html` index.html
 
 # Add markdown link for new mindmap to site index
+cd "$SITE"
 MDLINK="[$MAPNAME]($MAPNAME \"$STEM\")"
-MDINDEX="$SITE/index.md"
+MDINDEX="index.md"
 
 if [[ ! -e "$MDINDEX" ]]; then
     echo -e "# Mindmaps Index\n" > "$MDINDEX"
@@ -50,9 +51,26 @@ if ! grep "\[$MAPNAME\]" "$MDINDEX" >/dev/null; then
 fi
 
 # Convert markdown listing index to html
-INDEX="$SITE/index.html"
+export LISTING="listing.html"
 if [[ -z `which markdown_py` ]]; then
     echo "Cannot find markdown script (markdown_py)."
     exit 3
 fi
-markdown_py "$MDINDEX" > "$INDEX"
+markdown_py "$MDINDEX" > "$LISTING"
+
+# Embed listing in index.html template
+INDEX="index.html"
+if [[ -d template ]]; then
+    cp -an template/* .
+    export PRE=pre.html
+    export POST=post.html
+    if [[ -e $PRE ]] && [[ -e $POST ]]; then
+        echo -e $(cat $PRE && cat $LISTING && cat $POST) > "$INDEX"
+        rm $LISTING $PRE $POST
+    else
+        echo "Template requires $PRE and $POST."
+        exit 4
+    fi 
+else
+    mv $LISTING $INDEX
+fi

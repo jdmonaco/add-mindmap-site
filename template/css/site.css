@@ -1,0 +1,192 @@
+::selection {
+    background: #7A98BF;
+    color: #eee;
+}
+
+html {
+    background: white;
+}
+
+body {
+    line-height: 1.5;
+    font-size: 14pt;
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    position: relative;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* bicubic resizing for non-native sized IMG:
+code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
+.lt-ie8 img { 
+  -ms-interpolation-mode: bicubic; 
+}
+
+strong {
+    font-weight: normal;
+}
+
+header h1 {
+  letter-spacing: 1px;
+  color: #555;
+  margin: 0 0;
+  text-align: center;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 0.8em;
+  font-weight: normal;
+  text-transform: uppercase;
+  border-bottom: 1px dotted #222; 
+  background-color: #CCE5FF;
+}
+
+/*
+dark orange = #E6573E
+lighter dark orange = #FF998A
+darker light blue = #86B1E3
+lighter light blue = #CCE5FF
+darker light yellow = #EBD650
+lighter light yellow = #FFF3A6
+dark/sat blue (links) = #286EB8
+*/
+
+h1, h2 {
+  padding: 0.5em 0;
+}
+
+h1 {
+  font-size: 1.1em;
+  color: #444;
+}
+
+h2 {
+  font-size: 1.0em;
+  color: #555;
+}
+
+p {
+    margin-bottom: 1em;
+    font-size: 0.75em;
+    -webkit-hyphens: auto;
+    -moz-hypens: auto;
+    hyphens: auto;
+}
+
+figcaption {
+  text-align: center;
+  font-style: italic;
+  font-size: 0.75em;
+}
+
+li {
+    font-size: 0.75em;
+}
+
+a {
+    color: #286EB8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: none;
+    background-color: #7A98BF;
+    color: white;
+}
+
+header {
+    min-height: 4em;
+/*  max-width: 100%;*/
+}
+
+.flipped {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+
+header .accent {
+  display: none;
+}
+
+#logo {
+    margin: 1em auto 0.5em auto;
+    max-width: 90%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+}
+
+#logo:active {
+    opacity: 0.5;
+}
+
+#logo:active a {
+    background-color: white;
+}
+
+article {
+    width: 90%;
+    margin: 0 auto 2em auto;
+    padding: 0px 0;
+}
+
+article p {
+    margin-bottom: 1.0em;
+    font-size: 0.8em;
+}
+
+aside {
+  padding: 0.8em;
+  padding-bottom: 0.3em;
+  margin-bottom: 1em;
+  background: #CCE5FF
+}
+
+/* Intermediate screens */
+@media only screen and (min-width: 480px) {
+  body {
+    font-size: 15pt;
+  }
+}
+
+/* Wide screens */
+@media only screen and (min-width: 768px) {
+  body {
+    font-size: 16pt;
+    line-height: 1.6;
+  }
+  
+  aside {
+    float: right;
+    width: 38%;
+    margin-left: 1em;
+    box-shadow: 5px 5px 10px #aaa;
+    border-radius: 10px;
+  }
+  
+  aside p {
+    font-size: 0.7em;
+  }
+
+  article {
+    width: 75%;
+  }
+}
+
+/* Max-width screens */
+@media only screen and (min-width: 1250px) {
+  article {
+    width: 750px;
+  }
+}
+
+/* Media query for retina screens */
+@media screen and (-webkit-min-device-pixel-ratio:1.5), screen and (-o-min-device-pixel-ratio:3/2), screen and (-moz-device-pixel-ratio:1.5),screen and (min-device-pixel-ratio:1.5) {
+}
+
