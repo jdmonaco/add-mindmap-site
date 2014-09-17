@@ -43,7 +43,7 @@ mv `ls *.html` index.html
 # Add markdown link for new mindmap to site index
 cd "$SITE"
 MDLINK="[$MAPNAME]($MAPNAME \"$STEM\")"
-MDINDEX="index.md"
+MDINDEX=".index.md"
 
 if [[ ! -e "$MDINDEX" ]]; then
     echo -e "# Mindmaps Index\n" > "$MDINDEX"
