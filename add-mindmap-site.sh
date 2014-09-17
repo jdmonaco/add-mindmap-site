@@ -14,6 +14,9 @@ if [[ $# -ne 1 ]]; then
 fi
 
 ARCHIVE=$1
+if [[ `dirname "$1"` != /* ]]; then
+    ARCHIVE="`pwd`/$1"
+fi
 BASE=`basename "$ARCHIVE"`
 STEM=${BASE%.zip}
 
@@ -26,6 +29,7 @@ fi
 DATE=`date +"%Y-%m-%d"`
 MAPNAME="$DATE $STEM"
 MAPPATH="$SITE/$MAPNAME"
+rm -rf "$MAPPATH"
 mkdir -p "$MAPPATH"
 cd "$MAPPATH"
 
@@ -36,10 +40,14 @@ mv `ls *.html` index.html
 # Add markdown link for new mindmap to site index
 MDLINK="[$MAPNAME]($MAPNAME \"$STEM\")"
 MDINDEX="$SITE/index.md"
+
 if [[ ! -e "$MDINDEX" ]]; then
     echo -e "# Mindmaps Index\n" > "$MDINDEX"
 fi
-echo "* $MDLINK" >> "$MDINDEX"
+
+if ! grep "\[$MAPNAME\]" "$MDINDEX" >/dev/null; then
+    echo "* $MDLINK" >> "$MDINDEX"
+fi
 
 # Convert markdown listing index to html
 INDEX="$SITE/index.html"
