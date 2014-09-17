@@ -61,7 +61,7 @@ fi
 cat $MDOLD >> $MDINDEX && rm $MDOLD
 
 # Convert markdown listing index to html
-export LISTING=listing.html
+LISTING=listing.html
 if [[ -z `which markdown_py` ]]; then
     echo "Cannot find markdown script (markdown_py)."
     exit 3
@@ -72,8 +72,8 @@ markdown_py $MDINDEX > $LISTING
 INDEX=index.html
 if [[ -d template ]]; then
     cp -an template/* .
-    export PRE=pre.html
-    export POST=post.html
+    PRE=pre.html
+    POST=post.html
     if [[ -e $PRE ]] && [[ -e $POST ]]; then
         cat $PRE > $INDEX
         cat $LISTING >> $INDEX
