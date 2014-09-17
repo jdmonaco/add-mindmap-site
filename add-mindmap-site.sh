@@ -40,18 +40,25 @@ cd "$MAPPATH"
 unzip "$ARCHIVE" > /dev/null
 mv `ls *.html` index.html
 
-# Add markdown link for new mindmap to site index
+# Add markdown link for new mindmap to top of index listing
 cd "$SITE"
 MDLINK="[$MAPNAME]($MAPNAME \"$STEM\")"
 MDINDEX=.index.md
+MDOLD=.old.md
+touch $MDOLD
 
-if [[ ! -e $MDINDEX ]]; then
-    echo -e "# Mindmaps Index\n" > $MDINDEX
+if [[ -e $MDINDEX ]]; then
+    grep "^\*" $MDINDEX > $MDOLD
+    rm $MDINDEX
 fi
 
-if ! grep "\[$MAPNAME\]" $MDINDEX >/dev/null; then
+echo -e "# Mindmaps Index\n" > $MDINDEX
+
+if ! grep "\[$MAPNAME\]" $MDOLD >/dev/null; then
     echo "* $MDLINK" >> $MDINDEX
 fi
+
+cat $MDOLD >> $MDINDEX && rm $MDOLD
 
 # Convert markdown listing index to html
 export LISTING=listing.html
