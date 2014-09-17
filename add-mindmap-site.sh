@@ -4,6 +4,9 @@
 # Script to extract iThoughts web archives to a local web folder with index
 #
 
+# Ensure Unicode encoding if running in non-terminal shell or subshell
+export LANG=en_US.UTF-8
+
 # Set location of local web root for the mindmaps site
 SITE="$HOME/Sites/mindmaps-site"
 
@@ -51,7 +54,7 @@ if ! grep "\[$MAPNAME\]" "$MDINDEX" >/dev/null; then
 fi
 
 # Convert markdown listing index to html
-export LISTING="listing.html"
+export LISTING=listing.html
 if [[ -z `which markdown_py` ]]; then
     echo "Cannot find markdown script (markdown_py)."
     exit 3
@@ -59,13 +62,15 @@ fi
 markdown_py "$MDINDEX" > "$LISTING"
 
 # Embed listing in index.html template
-INDEX="index.html"
+INDEX=index.html
 if [[ -d template ]]; then
     cp -an template/* .
     export PRE=pre.html
     export POST=post.html
     if [[ -e $PRE ]] && [[ -e $POST ]]; then
-        echo -e $(cat $PRE && cat $LISTING && cat $POST) > "$INDEX"
+        cat $PRE > $INDEX
+        cat $LISTING >> $INDEX
+        cat $POST >> $INDEX
         rm $LISTING $PRE $POST
     else
         echo "Template requires $PRE and $POST."
