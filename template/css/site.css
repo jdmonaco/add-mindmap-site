@@ -72,14 +72,9 @@ p {
     hyphens: auto;
 }
 
-figcaption {
-  text-align: center;
-  font-style: italic;
-  font-size: 0.75em;
-}
-
 li {
     font-size: 0.75em;
+    margin-left: 1.5em;
 }
 
 a {
@@ -100,34 +95,6 @@ a:active {
 header {
     min-height: 4em;
 /*  max-width: 100%;*/
-}
-
-.flipped {
-  -moz-transform: scaleX(-1);
-  -o-transform: scaleX(-1);
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
-  filter: FlipH;
-  -ms-filter: "FlipH";
-}
-
-header .accent {
-  display: none;
-}
-
-#logo {
-    margin: 1em auto 0.5em auto;
-    max-width: 90%;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-touch-callout: none;
-}
-
-#logo:active {
-    opacity: 0.5;
-}
-
-#logo:active a {
-    background-color: white;
 }
 
 article {
